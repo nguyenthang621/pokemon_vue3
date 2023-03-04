@@ -1,0 +1,19 @@
+$primar-color: #ffce00;
+$sencondary-color: #fe4880;
+$dark-color: #212121;
+$light-color: #f3f3f3;
+
+$font: "Odibee Sans", cursive;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
