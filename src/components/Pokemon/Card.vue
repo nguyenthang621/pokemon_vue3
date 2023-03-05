@@ -1,12 +1,28 @@
 <template>
-  <div class="card-container" :class="{ disable: isDisable }">
+  <div
+    class="card-container"
+    :class="{ disable: isDisable }"
+    :style="{
+      height: `${(820 - 16 * 4) / Math.sqrt(arrayCard.length) - 16}px`,
+      width: `${
+        (((1000 - 16 * 4) / Math.sqrt(arrayCard.length) - 16) * 3) / 4
+      }px`,
+    }"
+  >
     <div
       class="wrapper"
       :class="this.isFlipped && 'flipped'"
       @click="onToggleFlipCard(card.value)"
     >
       <div class="card-face card-font">
-        <div class="card-content"></div>
+        <div
+          class="card-content"
+          :style="{
+            backgroundSize: `${
+              (((1000 - 16 * 4) / Math.sqrt(arrayCard.length) - 16) * 3) / 4 / 3
+            }px`,
+          }"
+        ></div>
       </div>
       <div class="card-face card-back">
         <div
@@ -35,6 +51,10 @@ export default {
     },
     rules: {
       type: Array,
+    },
+    arrayCard: {
+      type: [Array, Object],
+      default: () => [],
     },
   },
   data() {
@@ -66,7 +86,7 @@ export default {
   margin-right: 1rem;
   margin-bottom: 1rem;
   width: 90px;
-  height: 120px;
+  height: 90px;
 
   & .wrapper {
     width: 100%;

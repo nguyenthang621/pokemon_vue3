@@ -1,5 +1,16 @@
 <template>
   <div class="pokemon-container">
+    <div
+      class="btn-menu"
+      v-if="this.modeScreen === 'INTERACT'"
+      @click="this.onToggleMenu"
+    >
+      <menu-pokemon
+        v-if="this.isShowMenu"
+        @onSelect="handleStart($event)"
+        @onExit="handleRestart"
+      />
+    </div>
     <main-screen
       v-if="this.modeScreen === 'MAIN'"
       @onStart="handleStart($event)"
@@ -21,6 +32,7 @@
 import MainScreen from "./MainScreen.vue";
 import InteractScreen from "./InteractScreen.vue";
 import ResultScreen from "./ResultScreen.vue";
+import MenuPokemon from "./Menu.vue";
 import utilsArray from "../../utils/utilsArray.js";
 
 export default {
@@ -28,6 +40,7 @@ export default {
     MainScreen,
     InteractScreen,
     ResultScreen,
+    MenuPokemon,
   },
   data() {
     return {
@@ -38,6 +51,7 @@ export default {
         time: 0,
         totalTime: 0,
       },
+      isShowMenu: false,
     };
   },
   methods: {
@@ -75,6 +89,10 @@ export default {
       // show main screen
       this.modeScreen = "MAIN";
     },
+
+    onToggleMenu() {
+      this.isShowMenu = !this.isShowMenu;
+    },
   },
 };
 </script>
@@ -87,5 +105,15 @@ export default {
   color: #f3f3f3;
   position: relative;
   overflow: hidden;
+  & .btn-menu {
+    background: url("../../assets/icon.svg") no-repeat -843px -30px;
+    color: #f3f3f3;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+  }
 }
 </style>

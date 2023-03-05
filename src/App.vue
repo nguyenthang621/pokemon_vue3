@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="app">
     <pokemon-component />
   </div>
 </template>

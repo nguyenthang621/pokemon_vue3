@@ -6,21 +6,14 @@
         <p class="instruct">Select mode to start game</p>
       </div>
       <div class="modes">
-        <div class="option" @click="onHandelSelectLevel(6)">
-          <span class="level">Easy</span>
-          <span class="matrix">4x4</span>
-        </div>
-        <div class="option" @click="onHandelSelectLevel(36)">
-          <span class="level">Normal</span>
-          <span class="matrix">6x6</span>
-        </div>
-        <div class="option" @click="onHandelSelectLevel(64)">
-          <span class="level">Hard</span>
-          <span class="matrix">8x8</span>
-        </div>
-        <div class="option" @click="onHandelSelectLevel(100)">
-          <span class="level">Chaos</span>
-          <span class="matrix">10x10</span>
+        <div
+          class="option"
+          v-for="(item, index) in menuData"
+          @click="onHandelSelectLevel(item.total)"
+          :key="index"
+        >
+          <span class="level">{{ item.level }}</span>
+          <span class="matrix">{{ item.matrix }}</span>
         </div>
       </div>
     </div>
@@ -28,11 +21,17 @@
 </template>
 
 <script>
+import { menuData } from "../../data/pokemonData.js";
 export default {
   methods: {
     onHandelSelectLevel(totalCard) {
       this.$emit("onStart", { totalCard });
     },
+  },
+  data() {
+    return {
+      menuData,
+    };
   },
 };
 </script>
@@ -47,6 +46,8 @@ export default {
   align-items: center;
   justify-items: center;
   flex-direction: column;
+  background-color: #212121;
+
   & .title {
     & .text {
       text-transform: uppercase;

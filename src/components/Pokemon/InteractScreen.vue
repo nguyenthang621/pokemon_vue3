@@ -1,19 +1,32 @@
 <template>
   <div class="interact-container">
-    <card-flip
-      v-for="(card, index) in arrayCard"
-      :key="index"
-      :ref="`card-${index}`"
-      :urlBackFaceCard="`${card}.png`"
-      :card="{ index, value: card }"
-      @onFlip="onHandleRules($event)"
-      :rules="this.rules"
-    />
+    <div
+      class="inner-card"
+      :style="{
+        width: `${
+          ((((1000 - 16 * 2) / Math.sqrt(arrayCard.length) - 16) * 3) / 4 +
+            16) *
+          Math.sqrt(arrayCard.length)
+        }px`,
+      }"
+    >
+      <card-flip
+        v-for="(card, index) in arrayCard"
+        :key="index"
+        :ref="`card-${index}`"
+        :urlBackFaceCard="`${card}.png`"
+        :card="{ index, value: card }"
+        @onFlip="onHandleRules($event)"
+        :rules="this.rules"
+        :arrayCard="this.arrayCard"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import CardFlip from "./Card.vue";
+
 export default {
   components: {
     CardFlip,
@@ -77,8 +90,10 @@ export default {
 
 <style lang="scss" scoped>
 .interact-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 2rem auto;
+  & .inner-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+  }
 }
 </style>
